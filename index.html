@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>game sejarah</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -11,8 +12,12 @@
     <meta name="HandheldFriendly" content="true" />
     <meta name="mobile-web-app-capable" content="yes" />
     <link rel="shortcut icon" sizes="256x256" href="icon-256.png" />
+
     <style type="text/css">
-        * { padding: 0; margin: 0; }
+        * {
+            padding: 0;
+            margin: 0;
+        }
         html, body {
             background: #000;
             color: #fff;
@@ -23,12 +28,6 @@
         canvas {
             touch-action: none;
             -ms-touch-action: none;
-            display: block;
-        }
-        #c2canvasdiv {
-            position: absolute;
-            width: 100%;
-            height: 100%;
         }
     </style>
 </head>
@@ -40,30 +39,6 @@
 
     <script src="jquery-2.1.1.min.js"></script>
     <script src="c2runtime.js"></script>
-
-    <script>
-        // Matikan Cordova detection
-        window.c2iscordova = false;
-        window.c2isCrosswalk = false;
-
-        // Inisialisasi game setelah DOM siap
-        $(document).ready(function() {
-            var canvas = document.getElementById("c2canvas");
-            if (typeof cr_getC2Runtime === "function") {
-                var runtime = new (cr_getC2Runtime())(canvas);
-            } else {
-                // Fallback: cari constructor di global scope
-                for (var key in window) {
-                    if (typeof window[key] === "function" && 
-                        window[key].toString().indexOf("c2runtime") !== -1) {
-                        new window[key](canvas);
-                        break;
-                    }
-                }
-            }
-        });
-    </script>
-
     <script src="data.js"></script>
 </body>
 </html>
