@@ -38,15 +38,32 @@
         <canvas id="c2canvas" width="1280" height="720"></canvas>
     </div>
 
-    <!-- PENTING: Matikan deteksi Cordova agar berjalan di browser -->
-    <script>
-        window.c2iscordova = false;
-        window.c2isCrosswalk = false;
-    </script>
-
     <script src="jquery-2.1.1.min.js"></script>
     <script src="c2runtime.js"></script>
+
+    <script>
+        // Matikan Cordova detection
+        window.c2iscordova = false;
+        window.c2isCrosswalk = false;
+
+        // Inisialisasi game setelah DOM siap
+        $(document).ready(function() {
+            var canvas = document.getElementById("c2canvas");
+            if (typeof cr_getC2Runtime === "function") {
+                var runtime = new (cr_getC2Runtime())(canvas);
+            } else {
+                // Fallback: cari constructor di global scope
+                for (var key in window) {
+                    if (typeof window[key] === "function" && 
+                        window[key].toString().indexOf("c2runtime") !== -1) {
+                        new window[key](canvas);
+                        break;
+                    }
+                }
+            }
+        });
+    </script>
+
     <script src="data.js"></script>
 </body>
 </html>
-
